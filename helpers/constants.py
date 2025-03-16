@@ -1,4 +1,4 @@
-import time
+from datetime import time
 
 QUERY = """
 SELECT 

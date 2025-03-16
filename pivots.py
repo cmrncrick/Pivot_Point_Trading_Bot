@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from helpers.constants import INTERVAL_15M, LOOKBACK_PERIOD, TICKER
 from helpers.functions import (curr_price, data_retrieval, date_transform,
                                pivots, send_discord_msg)
+from helpers.log_setup import logger
 
 df = data_retrieval(days_lookback=LOOKBACK_PERIOD,
                     ticker=TICKER, interval=INTERVAL_15M)
@@ -17,8 +18,10 @@ pivot_levels = {
     "S1": None, "S2": None, "S3": None
 }
 
-pivot_levels["PP"], pivot_levels["R1"], pivot_levels["R2"], pivot_levels["R3"], \
-    pivot_levels["S1"], pivot_levels["S2"], pivot_levels["S3"] = pivots(df)
+pivot_levels["PP"], pivot_levels["R1"], \
+    pivot_levels["R2"], pivot_levels["R3"], \
+    pivot_levels["S1"], pivot_levels["S2"], \
+    pivot_levels["S3"] = pivots(df, logger)
 
 # Not sure I need to wait any amount of time unless I schedule for a certain time and then don't run until market open
 # now = datetime.now()

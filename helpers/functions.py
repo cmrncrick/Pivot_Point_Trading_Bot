@@ -46,7 +46,7 @@ def date_transform(df):
     return df
 
 
-def pivots(df):
+def pivots(df, logger):
     max_high = df['High'].max()
 
     min_low = df['Low'].min()
@@ -57,17 +57,31 @@ def pivots(df):
 
     pp = round((max_high + min_low + latest_close) / 3, 2)
 
+    logger.info(f"Pivot: {pp}")
+
     r1 = round(2 * pp - min_low, 2)
+
+    logger.info(f"R1: {r1}")
 
     r2 = round(pp + ran, 2)
 
+    logger.info(f"R2: {r2}")
+
     r3 = round(pp + ran * 2, 2)
+
+    logger.info(f"R3: {r3}")
 
     s1 = round(2 * pp - max_high, 2)
 
+    logger.info(f"S1: {s1}")
+
     s2 = round(pp - ran, 2)
 
+    logger.info(f"S2: {s2}")
+
     s3 = round(pp - ran * 2, 2)
+
+    logger.info(f"S3: {s3}")
 
     return pp, r1, r2, r3, s1, s2, s3
 
